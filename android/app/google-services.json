@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "321928406305",
+    "project_id": "ppam-b6d51",
+    "storage_bucket": "ppam-b6d51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321928406305:android:4240e4d5a6aae0bac84a60",
+        "android_client_info": {
+          "package_name": "com.metatony.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321928406305-q8d7uic7aqkjehe4ov519296dodk10l3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEJI5r4MSq6csR8qdK7U8acZ29IaRMClM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321928406305-q8d7uic7aqkjehe4ov519296dodk10l3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
