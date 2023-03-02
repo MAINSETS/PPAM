@@ -10,3 +10,5 @@ Langkah-Langkah setup:
 8. buat juga firestore database di firebase kalian
 9. setup rulesnya dari 'false' jadi 'true'
 10. jalankan perintah `flutter run` untuk menjalankan aplikasi
+
+sumber github: https://github.com/metatony/flutter-chat-app
