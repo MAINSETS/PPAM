@@ -5,7 +5,7 @@ Langkah-Langkah setup:
 3. git clone file ini
 4. buka terminal, masuk ke folder file ini dengan perintah `cd path/to/file`
 5. jalankan perintah `flutter pub get`
-6. setup firebasenya, buka file 'android/app/build.gradle' dan sesuaikan semuanya dengan firebase
+6. setup firebasenya, sesuaikan dengan applicationId "com.metatony.chat_app" ada di file 'android/app/build.gradle'
 7. buat juga authentication dengan email dan password di firebase
 8. buat juga firestore database di firebase
 9. setup rulesnya dari 'false' jadi 'true'
