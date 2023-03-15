@@ -1,4 +1,5 @@
 import 'package:chat_app/screens/chat_screen.dart';
+import 'package:chat_app/screens/home.dart';
 import 'package:chat_app/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -82,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (user != null) {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return ChatScreen();
+                          return HomeScreen();
                         }));
                       }
                       setState(() {

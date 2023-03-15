@@ -1,8 +1,10 @@
 import 'package:chat_app/screens/chat_screen.dart';
+import 'package:chat_app/screens/home.dart';
 import 'package:chat_app/widgets/register_button.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
 
@@ -69,7 +71,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       if (newUser != null) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ChatScreen()),
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
                         );
                       }
                       setState(() {

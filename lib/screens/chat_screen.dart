@@ -10,6 +10,7 @@ final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
 
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }

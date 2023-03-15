@@ -47,6 +47,14 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ],
               ),
+              const Text(
+                'Distruptive Corp.',
+                style: TextStyle(
+                  fontSize: 10.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ],
           ),
         ),
