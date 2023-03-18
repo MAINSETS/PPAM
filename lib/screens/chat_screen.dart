@@ -183,7 +183,6 @@ class MessageBubble extends StatelessWidget {
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
-
             sender,
             style: const TextStyle(fontSize: 10, color: Colors.black54),
           ),
@@ -197,7 +196,7 @@ class MessageBubble extends StatelessWidget {
                     topRight: Radius.circular(30),
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)),
-                     //use tenary oprator instead of if statemnt to create a different sender ui
+            //use tenary oprator instead of if statemnt to create a different sender ui
             elevation: 4,
             color: isMe ? Colors.black : Colors.purpleAccent,
             child: Padding(

@@ -1,5 +1,6 @@
 import 'package:chat_app/screens/chat_screen.dart';
 import 'package:chat_app/screens/login_screen.dart';
+import 'package:chat_app/screens/profile.dart';
 import 'package:chat_app/screens/questionaire.dart';
 import 'package:chat_app/screens/registration_screen.dart';
 import 'package:chat_app/screens/splash_screen.dart';
@@ -17,9 +18,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    const Questionaire(),
     const ChatScreen(),
-    const SplashScreen(),
+    const Questionaire(),
+    Profile(),
   ];
 
   @override
@@ -31,16 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _currentIndex,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.question_answer),
-            label: 'Questionaire',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.chat),
             label: 'Global Chat',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.logout),
-            label: 'Logout',
+            icon: Icon(Icons.question_answer),
+            label: 'Questionaire',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),

@@ -1,10 +1,3 @@
-//buat fitur questionaire hobi dan minat dan datanya masuk ke database dengan pertanyaan yang sudah ditentukan
-//1. What is your hobby?
-//2. What is your interest?
-//3. What is your favorite food?
-//4. What is your favorite drink?
-//5. What is your favorite movie?
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,7 +14,7 @@ class _QuestionaireState extends State<Questionaire> {
   final _auth = FirebaseAuth.instance;
   late User loggedInUser;
   late String hobby;
-  late String interest;
+  late String game;
   late String food;
   late String drink;
   late String movie;
@@ -92,10 +85,10 @@ class _QuestionaireState extends State<Questionaire> {
                 TextFormField(
                   textAlign: TextAlign.center,
                   onChanged: (value) {
-                    interest = value;
+                    game = value;
                   },
                   decoration: const InputDecoration(
-                    hintText: 'What is your interest?',
+                    hintText: 'What is your game?',
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                     border: OutlineInputBorder(
@@ -211,7 +204,7 @@ class _QuestionaireState extends State<Questionaire> {
                             .doc(loggedInUser.email)
                             .set({
                           'hobby': hobby,
-                          'interest': interest,
+                          'game': game,
                           'food': food,
                           'drink': drink,
                           'movie': movie,
