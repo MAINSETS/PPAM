@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _children = [
     const ChatScreen(),
     const Questionaire(),
-    Profile(),
+    ProfilePage(),
   ];
 
   @override
