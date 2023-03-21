@@ -23,6 +23,11 @@ class _QuestionaireState extends State<Questionaire> {
   void initState() {
     super.initState();
     getCurrentUser();
+    hobby = 'enter your hobby';
+    drink = 'enter your drink';
+    food = 'enter your food';
+    movie = 'enter your movie';
+    game = 'enter your game';
   }
 
   void getCurrentUser() async {

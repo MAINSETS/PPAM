@@ -22,6 +22,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> getUserData() async {
     final User? user = _auth.currentUser;
+    hobby = ' ';
+    drink = ' ';
+    food = ' ';
+    movie = ' ';
+    game = ' ';
   }
 
   @override
@@ -43,17 +48,29 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
+        backgroundColor: Colors.cyan,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Email: ${_auth.currentUser!.email}',
-              style: TextStyle(fontSize: 20.0),
+            Container(
+              padding: EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+              ),
+              child: Text(
+                'Email: ${_auth.currentUser!.email}',
+                style: TextStyle(fontSize: 20.0),
+              ),
             ),
-            Center(child: gethobby()),
+            Center(
+                child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.black)),
+                    child: gethobby())),
             Center(
               child: ElevatedButton(
                 onPressed: _logout,
