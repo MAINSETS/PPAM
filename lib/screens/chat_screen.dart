@@ -58,7 +58,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 //Implement logout functionality
               }),
         ],
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.lightBlueAccent,
+        title: const Text('⚡️Global Chat'),
       ),
       body: SafeArea(
         child: Column(
