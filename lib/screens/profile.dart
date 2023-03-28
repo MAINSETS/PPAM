@@ -1,3 +1,4 @@
+import 'package:chat_app/screens/questionaire.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,6 +41,13 @@ class _ProfilePageState extends State<ProfilePage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
+  }
+
+  Future<void> _question() async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => Questionaire()),
     );
   }
 
@@ -144,8 +152,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   Divider(),
                   Center(
                     child: ElevatedButton(
+                      onPressed: _question,
+                      child: Text("Questionaire"),
+                    ),
+                  ),
+                  Divider(),
+                  Center(
+                    child: ElevatedButton(
                       onPressed: _logout,
-                      child: Text('Logout'),
+                      child: Text("Logout"),
                     ),
                   ),
                 ],

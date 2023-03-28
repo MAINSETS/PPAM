@@ -1,4 +1,5 @@
 import 'package:chat_app/screens/chat_screen.dart';
+import 'package:chat_app/screens/hobby_chat.dart';
 import 'package:chat_app/screens/login_screen.dart';
 import 'package:chat_app/screens/profile.dart';
 import 'package:chat_app/screens/questionaire.dart';
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     const ChatScreen(),
-    const Questionaire(),
+    const ChatScreen2(),
     ProfilePage(),
   ];
 
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.question_answer),
-            label: 'Questionaire',
+            label: 'Hobby Chat',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

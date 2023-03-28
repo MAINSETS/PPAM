@@ -44,23 +44,11 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        leading: null,
-        actions: [
-          IconButton(
-              icon: const Icon(
-                Icons.close,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                _auth.signOut();
-                Navigator.pop(context);
-                //Implement logout functionality
-              }),
-        ],
-        backgroundColor: Colors.lightBlueAccent,
-        title: const Text('⚡️Global Chat'),
-      ),
+          elevation: 0,
+          leading: null,
+          backgroundColor: Colors.lightBlueAccent,
+          title: const Text('⚡️Global Chat'),
+          automaticallyImplyLeading: false),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

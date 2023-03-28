@@ -1,3 +1,4 @@
+import 'package:chat_app/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,11 +24,11 @@ class _QuestionaireState extends State<Questionaire> {
   void initState() {
     super.initState();
     getCurrentUser();
-    hobby = 'enter your hobby';
-    drink = 'enter your drink';
-    food = 'enter your food';
-    movie = 'enter your movie';
-    game = 'enter your game';
+    hobby = ' ';
+    drink = ' ';
+    food = ' ';
+    movie = ' ';
+    game = ' ';
   }
 
   void getCurrentUser() async {
@@ -46,8 +47,20 @@ class _QuestionaireState extends State<Questionaire> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ProfilePage();
+            }));
+          },
+        ),
         title: const Text('Questionaire'),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        bottom: PreferredSize(
+          child: Text('Please fill all the fields before submitting'),
+          preferredSize: const Size.fromHeight(50.0),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
