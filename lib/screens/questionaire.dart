@@ -1,3 +1,4 @@
+import 'package:chat_app/screens/home.dart';
 import 'package:chat_app/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -51,7 +52,7 @@ class _QuestionaireState extends State<Questionaire> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ProfilePage();
+              return HomeScreen();
             }));
           },
         ),
@@ -227,7 +228,10 @@ class _QuestionaireState extends State<Questionaire> {
                           'drink': drink,
                           'movie': movie,
                         });
-                        Navigator.pushNamed(context, 'chat');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
                       },
                       minWidth: 200.0,
                       height: 42.0,
