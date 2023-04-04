@@ -19,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late String email;
   late String password;
   bool showSpinner = false;
+  String errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -89,10 +90,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {
                         showSpinner = false;
                       });
-                    } catch (e) {
-                      print(e);
+                    } on FirebaseAuthException catch (e) {
+                      setState(() {
+                        showSpinner = false;
+                        errorMessage = e.message!;
+                      });
                     }
                   },
+                ),
+                Text(
+                  errorMessage,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 16.0,
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
