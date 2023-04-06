@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key});
+  const RegistrationScreen({Key? key});
 
   //static String id = 'registration_screen';
 
@@ -16,8 +16,8 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
-  late String email;
-  late String password;
+  String email = '';
+  String password = '';
   bool showSpinner = false;
 
   @override
@@ -67,7 +67,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       });
                       final newUser =
                           await _auth.createUserWithEmailAndPassword(
-                              email: email, password: password);
+                              email: email.trim(), password: password);
                       if (newUser != null) {
                         Navigator.push(
                           context,
@@ -79,6 +79,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       });
                     } catch (e) {
                       print(e);
+                      setState(() {
+                        showSpinner = false;
+                      });
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text('Invalid email or password'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     }
                   },
                 ),

@@ -24,7 +24,7 @@ class _PasswordResetState extends State<PasswordReset> {
             TextFormField(
               controller: _emailController,
               decoration: InputDecoration(
-                labelText: 'email',
+                labelText: 'Email',
               ),
               validator: (value) {
                 if (value!.isEmpty) {
@@ -34,6 +34,11 @@ class _PasswordResetState extends State<PasswordReset> {
               },
             ),
             MaterialButton(
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              color: Colors.yellow,
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   await _auth.sendPasswordResetEmail(

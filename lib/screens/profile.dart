@@ -1,8 +1,13 @@
+import 'dart:io';
+import 'package:chat_app/screens/password.dart';
 import 'package:chat_app/screens/questionaire.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chat_app/screens/login_screen.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -13,6 +18,8 @@ class _ProfilePageState extends State<ProfilePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Stream<QuerySnapshot> _firestore =
       FirebaseFirestore.instance.collection('users').snapshots();
+  File? _image;
+  String _imageUrl = '';
 
   late String email;
   late String hobby;
@@ -20,6 +27,28 @@ class _ProfilePageState extends State<ProfilePage> {
   late String food;
   late String movie;
   late String game;
+
+  Future<void> _getImageAndUpload() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+
+      final Reference firebaseStorageRef =
+          FirebaseStorage.instance.ref().child('halo.png');
+      final UploadTask uploadTask = firebaseStorageRef.putFile(_image!);
+      await uploadTask.whenComplete(() async {
+        print('File Uploaded');
+        _imageUrl = await firebaseStorageRef.getDownloadURL();
+        setState(() {});
+      });
+    } else {
+      print('No image selected.');
+    }
+  }
 
   Future<void> getUserData() async {
     final User? user = _auth.currentUser;
@@ -34,6 +63,15 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     getUserData();
+    FirebaseStorage.instance
+        .ref()
+        .child('halo.png')
+        .getDownloadURL()
+        .then((url) {
+      setState(() {
+        _imageUrl = url;
+      });
+    });
   }
 
   Future<void> _logout() async {
@@ -81,35 +119,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.red.shade300,
-                        minRadius: 35.0,
-                        child: Icon(
-                          Icons.call,
-                          size: 30.0,
-                        ),
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white70,
-                        minRadius: 60.0,
+                      GestureDetector(
+                        onTap: _getImageAndUpload,
                         child: CircleAvatar(
-                          radius: 50.0,
-                          backgroundImage: NetworkImage(
-                              'https://sportshub.cbsistatic.com/i/2022/11/13/2c7984b1-b8e3-44f1-84a3-85218a3743c0/suzume-no-tojimari-makoto-shinkai-anime-movie-poster.jpg'),
-                        ),
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.red.shade300,
-                        minRadius: 35.0,
-                        child: Icon(
-                          Icons.message,
-                          size: 30.0,
+                          backgroundColor: Colors.white70,
+                          minRadius: 60.0,
+                          backgroundImage: _imageUrl.isNotEmpty
+                              ? NetworkImage(_imageUrl)
+                              : null,
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: 10,
                   ),
                   Text(
                     'Email: ${_auth.currentUser!.email}',
@@ -154,6 +174,19 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: ElevatedButton(
                       onPressed: _question,
                       child: Text("Questionaire"),
+                    ),
+                  ),
+                  Divider(),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PasswordReset()),
+                        );
+                      },
+                      child: Text("Change Password"),
                     ),
                   ),
                   Divider(),
