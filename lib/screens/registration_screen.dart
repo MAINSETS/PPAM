@@ -87,7 +87,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text('Error'),
-                            content: const Text('Invalid email or password'),
+                            content: const Text(
+                                'Invalid email or password: email must be email format and password should be at least 6 characters.'),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {

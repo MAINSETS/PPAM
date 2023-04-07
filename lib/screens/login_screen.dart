@@ -83,31 +83,39 @@ class _LoginScreenState extends State<LoginScreen> {
                       final user = await _auth.signInWithEmailAndPassword(
                           email: email, password: password);
                       if (user != null) {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return HomeScreen();
-                        }));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
                       }
                       setState(() {
                         showSpinner = false;
                       });
-                    } on FirebaseAuthException catch (e) {
+                    } catch (e) {
+                      print(e);
                       setState(() {
                         showSpinner = false;
-                        errorMessage = e.message!;
                       });
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text(
+                                'Please check your email and password and try again.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     }
                   },
-                ),
-                Text(
-                  errorMessage,
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 16.0,
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
                 ),
                 TextButton(
                     onPressed: () {

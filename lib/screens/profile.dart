@@ -37,12 +37,18 @@ class _ProfilePageState extends State<ProfilePage> {
         _image = File(pickedFile.path);
       });
 
+      final User? user = _auth.currentUser;
+      final String fileName = user!.uid + '.png';
       final Reference firebaseStorageRef =
-          FirebaseStorage.instance.ref().child('halo.png');
+          FirebaseStorage.instance.ref().child(fileName);
       final UploadTask uploadTask = firebaseStorageRef.putFile(_image!);
       await uploadTask.whenComplete(() async {
         print('File Uploaded');
         _imageUrl = await firebaseStorageRef.getDownloadURL();
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user!.uid)
+            .update({'profile_picture': _imageUrl});
         setState(() {});
       });
     } else {
@@ -52,11 +58,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> getUserData() async {
     final User? user = _auth.currentUser;
-    hobby = ' ';
-    drink = ' ';
-    food = ' ';
-    movie = ' ';
-    game = ' ';
+    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .get();
+    hobby = snapshot.get('hobby') ?? '';
+    drink = snapshot.get('drink') ?? '';
+    food = snapshot.get('food') ?? '';
+    movie = snapshot.get('movie') ?? '';
+    game = snapshot.get('game') ?? '';
   }
 
   @override
@@ -65,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
     getUserData();
     FirebaseStorage.instance
         .ref()
-        .child('halo.png')
+        .child('${_auth.currentUser!.uid}.png')
         .getDownloadURL()
         .then((url) {
       setState(() {
@@ -91,6 +101,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final User? user = _auth.currentUser;
+    final String fileName = user!.uid + '.png';
     return MaterialApp(
       title: 'Profile',
       home: Scaffold(
@@ -211,32 +223,43 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (context, querySnapshot) {
         if (querySnapshot != null) {
           final List<DocumentSnapshot> documents = querySnapshot.data!.docs;
+          DocumentSnapshot? userData;
+          for (var doc in documents) {
+            if (doc.id == _auth.currentUser!.email) {
+              userData = doc;
+              break;
+            }
+          }
+          if (userData == null) {
+            return Text('Please answer the questionaire');
+          }
           return ListView.builder(
             shrinkWrap: true,
-            itemCount: documents.length,
+            itemCount: 1,
             itemBuilder: (context, index) {
+              DocumentSnapshot document = documents[index];
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Hobby: ${documents[index]['hobby']}',
+                    'Hobby: ${userData!['hobby'] ?? ''}',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   Text(
-                    'Drink: ${documents[index]['drink']}',
+                    'Drink: ${userData!['drink'] ?? ''}',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   Text(
-                    'Food: ${documents[index]['food']}',
+                    'Food: ${userData!['food'] ?? ''}',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   Text(
-                    'Movies: ${documents[index]['movie']}',
+                    'Movies: ${userData!['movie'] ?? ''}',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   Text(
-                    'Games: ${documents[index]['game']}',
+                    'Games: ${userData!['game'] ?? ''}',
                     style: TextStyle(fontSize: 20.0),
                   ),
                 ],

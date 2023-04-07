@@ -25,11 +25,6 @@ class _QuestionaireState extends State<Questionaire> {
   void initState() {
     super.initState();
     getCurrentUser();
-    hobby = ' ';
-    drink = ' ';
-    food = ' ';
-    movie = ' ';
-    game = ' ';
   }
 
   void getCurrentUser() async {
@@ -217,10 +212,9 @@ class _QuestionaireState extends State<Questionaire> {
                     elevation: 5.0,
                     child: MaterialButton(
                       onPressed: () {
-                        //Implement login functionality.
                         FirebaseFirestore.instance
                             .collection('users')
-                            .doc(loggedInUser.email)
+                            .doc(FirebaseAuth.instance.currentUser!.email)
                             .set({
                           'hobby': hobby,
                           'game': game,
