@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>343610322886-9fkkr6ti5srm3bgbaffp3lg5lk37gu4h.apps.googleusercontent.com</string>
+	<string>321928406305-mfslfm0q3er6u1l2tdq0cd91elhfiahj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.343610322886-9fkkr6ti5srm3bgbaffp3lg5lk37gu4h</string>
+	<string>com.googleusercontent.apps.321928406305-mfslfm0q3er6u1l2tdq0cd91elhfiahj</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA7f1wZC1HUxCNlRx4MA9vmqjCpaT77OwY</string>
+	<string>AIzaSyC3yeZZAWKwjBn7ipHVwqB6Wlc-sDVjG7k</string>
 	<key>GCM_SENDER_ID</key>
-	<string>343610322886</string>
+	<string>321928406305</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.chatApp</string>
+	<string>com.metatony.chatapp</string>
 	<key>PROJECT_ID</key>
-	<string>textme-85cbd</string>
+	<string>ppam-b6d51</string>
 	<key>STORAGE_BUCKET</key>
-	<string>textme-85cbd.appspot.com</string>
+	<string>ppam-b6d51.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:343610322886:ios:109a3048011017ae084cc7</string>
+	<string>1:321928406305:ios:2881e0954103a171c84a60</string>
+	<key>DATABASE_URL</key>
+	<string>https://ppam-b6d51-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 </dict>
 </plist>
