@@ -211,21 +211,55 @@ class _QuestionaireState extends State<Questionaire> {
                     borderRadius: BorderRadius.circular(30.0),
                     elevation: 5.0,
                     child: MaterialButton(
-                      onPressed: () {
-                        FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(FirebaseAuth.instance.currentUser!.email)
-                            .set({
-                          'hobby': hobby,
-                          'game': game,
-                          'food': food,
-                          'drink': drink,
-                          'movie': movie,
-                        });
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                      onPressed: () async {
+                        try {
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(FirebaseAuth.instance.currentUser!.email)
+                              .set({
+                            'hobby': hobby,
+                            'game': game,
+                            'food': food,
+                            'drink': drink,
+                            'movie': movie,
+                          });
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                    title: Text('Success'),
+                                    content: Text(
+                                        'Your data has been submitted, please check your profile to see your data.'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return HomeScreen();
+                                          }));
+                                        },
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ));
+                        } catch (e) {
+                          print(e);
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                    title: Text('Error'),
+                                    content: Text(
+                                        'The field(s) cannot be empty, please fill all the fields.'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ));
+                        }
                       },
                       minWidth: 200.0,
                       height: 42.0,

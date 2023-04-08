@@ -103,116 +103,119 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final User? user = _auth.currentUser;
     final String fileName = user!.uid + '.png';
-    return MaterialApp(
-      title: 'Profile',
-      home: Scaffold(
-        appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
+          elevation: 0,
+          leading: null,
           backgroundColor: Colors.red,
-          title: Center(
-            child: const Text('Profile'),
+          title: const Text('Profile'),
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
           ),
-        ),
-        body: ListView(
-          children: <Widget>[
-            Container(
-              height: 250,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.red, Colors.deepOrange.shade300],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  stops: [0.5, 0.9],
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: _getImageAndUpload,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white70,
-                          minRadius: 60.0,
-                          backgroundImage: _imageUrl.isNotEmpty
-                              ? NetworkImage(_imageUrl)
-                              : null,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    'Email: ${_auth.currentUser!.email}',
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    'Hello',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                    ),
-                  ),
-                ],
+          centerTitle: true,
+          automaticallyImplyLeading: false),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 250,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.red, Colors.deepOrange.shade300],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                stops: [0.5, 0.9],
               ),
             ),
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Divider(),
-                  ListTile(
-                    title: Text(
-                      'What I Like: ',
-                      style: TextStyle(
-                        color: Colors.deepOrange,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: _getImageAndUpload,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white70,
+                        minRadius: 60.0,
+                        backgroundImage: _imageUrl.isNotEmpty
+                            ? NetworkImage(_imageUrl)
+                            : null,
                       ),
                     ),
+                  ],
+                ),
+                Text(
+                  'Email: ${_auth.currentUser!.email}',
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  Center(
-                    child: Container(
-                      padding: EdgeInsets.all(20.0),
-                      child: gethobby(),
+                ),
+                Text(
+                  'Hello',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            child: Column(
+              children: <Widget>[
+                Divider(),
+                ListTile(
+                  title: Text(
+                    'What I Like: ',
+                    style: TextStyle(
+                      color: Colors.deepOrange,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Divider(),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: _question,
-                      child: Text("Questionaire"),
-                    ),
+                ),
+                Center(
+                  child: Container(
+                    padding: EdgeInsets.all(20.0),
+                    child: gethobby(),
                   ),
-                  Divider(),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PasswordReset()),
-                        );
-                      },
-                      child: Text("Change Password"),
-                    ),
+                ),
+                Divider(),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: _question,
+                    child: Text("Questionaire"),
                   ),
-                  Divider(),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: _logout,
-                      child: Text("Logout"),
-                    ),
+                ),
+                Divider(),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PasswordReset()),
+                      );
+                    },
+                    child: Text("Change Password"),
                   ),
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+                Divider(),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: _logout,
+                    child: Text("Logout"),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

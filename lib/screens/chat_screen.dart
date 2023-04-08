@@ -47,7 +47,13 @@ class _ChatScreenState extends State<ChatScreen> {
           elevation: 0,
           leading: null,
           backgroundColor: Colors.lightBlueAccent,
-          title: const Text('⚡️Global Chat'),
+          title: const Text('Global Chat'),
+          centerTitle: true,
+          titleTextStyle: const TextStyle(
+            color: Colors.black,
+            fontSize: 25.0,
+            fontWeight: FontWeight.bold,
+          ),
           automaticallyImplyLeading: false),
       body: SafeArea(
         child: Column(
