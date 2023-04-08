@@ -26,7 +26,6 @@ class RegisterButton extends StatelessWidget {
         ),
       ),
       onPressed: onpPressed,
-      //Navigator.pushNamed(context, 'registration_screen');
     );
   }
 }
