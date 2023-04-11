@@ -26,6 +26,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void _checkIfUserIsLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _currentUser = _auth.currentUser;
+    if (_currentUser != null) {
+      await prefs.setBool('isLoggedIn', true);
+    } else {
+      await prefs.setBool('isLoggedIn', false);
+    }
     if (_currentUser != null && prefs.getBool('isLoggedIn') == true) {
       Navigator.pushReplacement(
         context,
