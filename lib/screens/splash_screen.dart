@@ -1,9 +1,12 @@
+import 'package:chat_app/screens/home.dart';
 import 'package:chat_app/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key}) : super(key: key);
   static String id = 'splash_screen';
 
   @override
@@ -11,16 +14,35 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late User? _currentUser;
+
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 5), () {
-      Navigator.push(
+    super.initState();
+    _checkIfUserIsLoggedIn();
+  }
+
+  void _checkIfUserIsLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _currentUser = _auth.currentUser;
+    if (_currentUser != null && prefs.getBool('isLoggedIn') == true) {
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (BuildContext context) {
-          return const WelcomeScreen();
+          return const HomeScreen();
         }),
       );
-    });
+    } else {
+      Future.delayed(const Duration(seconds: 5), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return const WelcomeScreen();
+          }),
+        );
+      });
+    }
   }
 
   Widget build(BuildContext context) {
@@ -48,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
               const Text(
-                'Distruptive Corp.',
+                'Disruptive Corp.',
                 style: TextStyle(
                   fontSize: 10.0,
                   color: Colors.black,
