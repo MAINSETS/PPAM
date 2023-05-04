@@ -150,16 +150,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 Text(
                   'Email: ${_auth.currentUser!.email}',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                  ),
-                ),
-                Text(
-                  'Hello',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
                   ),
                 ),
               ],
