@@ -16,7 +16,7 @@ Langkah-Langkah setup:
 Langkah-Langkah shared preference:
 
 1. buka file android/app/src/main/AndroidManifest.xml
-2. tambahkan: <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+2. tambahkan: "<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>"
 3. kemudian edit file dart di lib yang diinginkan adanya shared preference (dalam kode ini adanya di splash_screen.dart)
 
 Deployment: flutter build apk
